@@ -22,7 +22,9 @@ export function AdminShell({ children }: AdminShellProps) {
         )}
       >
         <Header />
-        <main className="flex-1 px-4 py-5 sm:px-6 lg:px-7">{children}</main>
+        <main className="flex-1 px-6 py-7 sm:px-10 lg:px-12 xl:px-16">
+          {children}
+        </main>
       </div>
     </div>
   );

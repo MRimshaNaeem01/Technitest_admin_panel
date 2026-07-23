@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { CoinsReferralsView } from "@/components/coins/coins-referrals-view";
 
 export default function CoinsPage() {
-  return <PlaceholderPage title="Coins & Referrals" />;
+  return <CoinsReferralsView />;
 }

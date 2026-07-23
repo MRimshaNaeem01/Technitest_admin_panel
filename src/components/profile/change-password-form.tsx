@@ -3,64 +3,61 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-import {
-  ProfileField,
-  profileInputClassName,
-} from "@/components/profile/profile-field";
-import { cn } from "@/lib/utils";
+import { TextField } from "@/components/ui/text-field";
 
-function PasswordInput({
-  id,
+function PasswordField({
   label,
+  id,
   defaultValue,
 }: {
-  id: string;
   label: string;
+  id: string;
   defaultValue?: string;
 }) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <ProfileField label={label}>
-      <div className="relative">
-        <input
-          id={id}
-          type={visible ? "text" : "password"}
-          defaultValue={defaultValue}
-          className={cn(profileInputClassName, "pr-11")}
-        />
-        <button
-          type="button"
-          aria-label={visible ? "Hide password" : "Show password"}
-          onClick={() => setVisible((prev) => !prev)}
-          className="absolute top-1/2 right-3 -translate-y-1/2 rounded-md p-1 text-[#9ca3af] transition hover:text-[#6b7280]"
-        >
-          {visible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-        </button>
-      </div>
-    </ProfileField>
+    <div className="relative">
+      <TextField
+        id={id}
+        label={label}
+        required
+        type={visible ? "text" : "password"}
+        defaultValue={defaultValue}
+        placeholder={label}
+        inputClassName="pr-12"
+      />
+      <button
+        type="button"
+        aria-label={visible ? "Hide password" : "Show password"}
+        onClick={() => setVisible((prev) => !prev)}
+        className="absolute top-[40px] right-4 rounded-md p-1 text-[#9ca3af] transition hover:text-[#6b7280]"
+      >
+        {visible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+      </button>
+    </div>
   );
 }
 
 export function ChangePasswordForm() {
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="max-w-2xl space-y-8">
       <div>
-        <h2 className="text-lg font-bold text-[#111827]">Password</h2>
-        <p className="mt-1 text-sm leading-relaxed text-[#6b7280]">
+        <h2 className="text-[16px] font-bold text-[#111111]">Password</h2>
+        <p className="mt-1.5 text-sm leading-relaxed text-[#6b7280]">
           Update your account security by changing your current password or
           securely viewing it if forgotten.
         </p>
       </div>
 
-      <div className="space-y-4">
-        <PasswordInput
+      <div className="space-y-6">
+        <PasswordField
           id="old-password"
           label="Old Password"
           defaultValue="password123"
         />
         <div className="space-y-2">
-          <PasswordInput
+          <PasswordField
             id="new-password"
             label="New Password"
             defaultValue="NewPass@123"
@@ -74,7 +71,7 @@ export function ChangePasswordForm() {
 
       <button
         type="button"
-        className="inline-flex h-12 items-center justify-center rounded-xl bg-[#f0a500] px-8 text-sm font-semibold text-white transition hover:bg-[#d99400]"
+        className="inline-flex h-[48px] min-w-[168px] items-center justify-center rounded-full bg-[#e89b1e] px-8 text-[15px] font-semibold text-white transition hover:bg-[#d18b15]"
       >
         Save Changes
       </button>

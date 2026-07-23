@@ -67,7 +67,7 @@ export function UserDetailView({ user, certificates }: UserDetailViewProps) {
         />
       </div>
 
-      <UserProfileInfo user={user} />
+      <UserProfileInfo user={user} readonly />
       <UserCertificatesTable certificates={certificates} />
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Download } from "lucide-react";
 
-import { FilterSelect } from "@/components/shared/filter-select";
+import { DropdownMenu } from "@/components/shared/dropdown-menu";
 import { Pagination } from "@/components/shared/pagination";
 import { UsersTable } from "@/components/users/users-table";
 import { countryOptions, users as allUsers } from "@/data/users";
@@ -45,7 +45,7 @@ export function UserManagementView() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <FilterSelect
+        <DropdownMenu
           label="Country"
           value={country}
           options={countryOptions}
@@ -54,7 +54,7 @@ export function UserManagementView() {
             setPage(1);
           }}
         />
-        <FilterSelect
+        <DropdownMenu
           label="Date"
           value={dateFilter}
           options={dateOptions}

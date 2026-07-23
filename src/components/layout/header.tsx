@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { Bell, ChevronDown, Menu } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 
-import { TechnitestLogo } from "@/components/brand/technitest-logo";
+import { ProfileMenu } from "@/components/layout/profile-menu";
 import { cn } from "@/lib/utils";
 import { useSidebarStore } from "@/store/sidebar-store";
 
@@ -18,7 +17,7 @@ export function Header({ className }: HeaderProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex h-[72px] items-center justify-between gap-3 border-b border-[#eef1f6] bg-white px-4 sm:px-6",
+        "sticky top-0 z-30 flex h-[72px] items-center justify-between gap-3 border-b border-[#eef1f6] bg-white px-6 sm:px-10 lg:px-12 xl:px-16",
         className
       )}
     >
@@ -31,7 +30,14 @@ export function Header({ className }: HeaderProps) {
         >
           <Menu className="size-5" />
         </button>
-        <TechnitestLogo />
+        <Image
+          src="/TechLogo.png"
+          alt="Technitest"
+          width={160}
+          height={40}
+          className="h-9 w-auto object-contain"
+          priority
+        />
       </div>
 
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -43,22 +49,7 @@ export function Header({ className }: HeaderProps) {
           <span className="hidden sm:inline">Notifications</span>
         </button>
 
-        <Link
-          href="/profile"
-          className="inline-flex items-center gap-2.5 rounded-lg px-1.5 py-1 transition hover:bg-[#f3f4f6]"
-        >
-          <Image
-            src="https://i.pravatar.cc/80?img=12"
-            alt="Ammad Aslam"
-            width={36}
-            height={36}
-            className="size-9 rounded-full object-cover"
-          />
-          <span className="hidden text-sm font-semibold text-[#111827] md:inline">
-            Ammad Aslam
-          </span>
-          <ChevronDown className="hidden size-4 text-[#6b7280] md:block" />
-        </Link>
+        <ProfileMenu />
       </div>
     </header>
   );

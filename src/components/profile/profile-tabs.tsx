@@ -9,15 +9,15 @@ type ProfileTabsProps = {
 
 export function ProfileTabs({ activeTab, onChange }: ProfileTabsProps) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full bg-white p-1 shadow-sm">
+    <div className="flex flex-wrap items-center gap-2">
       <button
         type="button"
         onClick={() => onChange("personal")}
         className={cn(
-          "rounded-full px-4 py-2 text-sm font-semibold transition",
+          "rounded-full px-5 py-2.5 text-sm font-semibold transition",
           activeTab === "personal"
-            ? "bg-[#111827] text-white"
-            : "bg-transparent text-[#6b7280] hover:text-[#111827]"
+            ? "bg-[#1a1a1a] text-white"
+            : "bg-transparent text-[#111111] hover:bg-black/5"
         )}
       >
         Personal Information
@@ -26,10 +26,10 @@ export function ProfileTabs({ activeTab, onChange }: ProfileTabsProps) {
         type="button"
         onClick={() => onChange("password")}
         className={cn(
-          "rounded-full px-4 py-2 text-sm font-semibold transition",
+          "rounded-full px-5 py-2.5 text-sm font-semibold transition",
           activeTab === "password"
-            ? "bg-[#111827] text-white"
-            : "bg-transparent text-[#6b7280] hover:text-[#111827]"
+            ? "bg-[#1a1a1a] text-white"
+            : "bg-transparent text-[#111111] hover:bg-black/5"
         )}
       >
         Change Password

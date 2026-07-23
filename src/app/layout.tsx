@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Urbanist } from "next/font/google";
 
 import { AdminShell } from "@/components/layout/admin-shell";
 
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const urbanist = Urbanist({
+  variable: "--font-urbanist",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} h-full antialiased`}>
+    <html lang="en" className={`${urbanist.variable} h-full antialiased`}>
       <body className="min-h-full font-sans">
         <AdminShell>{children}</AdminShell>
       </body>

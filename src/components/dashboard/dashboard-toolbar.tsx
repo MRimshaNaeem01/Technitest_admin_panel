@@ -1,16 +1,14 @@
 "use client";
 
-import { CalendarDays, ChevronDown, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
+
+import { DateRangePicker } from "@/components/ui/date-range-picker";
 
 type DashboardToolbarProps = {
   title?: string;
-  dateRange?: string;
 };
 
-export function DashboardToolbar({
-  title = "Dashboard",
-  dateRange = "01/07/2025 - 31/07/2025",
-}: DashboardToolbarProps) {
+export function DashboardToolbar({ title = "Dashboard" }: DashboardToolbarProps) {
   return (
     <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <h1 className="text-[28px] font-bold tracking-tight text-[#111827]">
@@ -18,14 +16,7 @@ export function DashboardToolbar({
       </h1>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button
-          type="button"
-          className="inline-flex h-11 items-center gap-2.5 rounded-xl border border-[#e5e7eb] bg-white px-3.5 text-sm font-medium text-[#374151] shadow-sm transition hover:bg-[#f9fafb]"
-        >
-          <CalendarDays className="size-4 text-[#6b7280]" />
-          <span>{dateRange}</span>
-          <ChevronDown className="ml-1 size-4 text-[#9ca3af]" />
-        </button>
+        <DateRangePicker dualMonth />
 
         <button
           type="button"
