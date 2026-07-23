@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { GamificationView } from "@/components/gamification/gamification-view";
 
 export default function GamificationPage() {
-  return <PlaceholderPage title="Gamification" />;
+  return <GamificationView />;
 }
