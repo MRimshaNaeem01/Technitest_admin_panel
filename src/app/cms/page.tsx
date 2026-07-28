@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { CmsView } from "@/components/cms/cms-view";
 
 export default function CmsPage() {
-  return <PlaceholderPage title="Content Management CMS" />;
+  return <CmsView />;
 }

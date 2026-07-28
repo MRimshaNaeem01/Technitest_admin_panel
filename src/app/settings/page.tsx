@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { SettingsView } from "@/components/settings/settings-view";
 
 export default function SettingsPage() {
-  return <PlaceholderPage title="System Settings" />;
+  return <SettingsView />;
 }

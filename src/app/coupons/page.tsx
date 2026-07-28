@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { CouponsManagementView } from "@/components/coupons/coupons-management-view";
 
 export default function CouponsPage() {
-  return <PlaceholderPage title="Coupons Management" />;
+  return <CouponsManagementView />;
 }

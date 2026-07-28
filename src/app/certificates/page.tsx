@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { CertificatesManagementView } from "@/components/certificates/certificates-management-view";
 
 export default function CertificatesPage() {
-  return <PlaceholderPage title="Certificate Management" />;
+  return <CertificatesManagementView />;
 }

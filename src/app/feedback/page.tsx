@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { FeedbackView } from "@/components/feedback/feedback-view";
 
 export default function FeedbackPage() {
-  return <PlaceholderPage title="Feedback & Reviews" />;
+  return <FeedbackView />;
 }

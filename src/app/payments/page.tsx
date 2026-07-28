@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { PaymentsView } from "@/components/payments/payments-view";
 
 export default function PaymentsPage() {
-  return <PlaceholderPage title="Payment & Transactions" />;
+  return <PaymentsView />;
 }

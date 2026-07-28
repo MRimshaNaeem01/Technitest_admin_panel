@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { RolesPermissionsView } from "@/components/roles/roles-permissions-view";
 
 export default function RolesPage() {
-  return <PlaceholderPage title="Roles & Permissions" />;
+  return <RolesPermissionsView />;
 }
