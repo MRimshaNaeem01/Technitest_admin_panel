@@ -19,7 +19,11 @@ import type { CmsTab, CmsPage, AdvertisementBanner, BlogPost } from "@/data/cms"
 export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<CmsTab>(
-    initialTab === "advertisements" ? "advertisements" : initialTab === "blogs" ? "blogs" : "pages"
+    initialTab === "advertisements"
+      ? "advertisements"
+      : initialTab === "blogs"
+        ? "blogs"
+        : "pages"
   );
 
   const [pages] = useState<CmsPage[]>(initialPages);
@@ -28,9 +32,14 @@ export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
 
   const [adDialogOpen, setAdDialogOpen] = useState(false);
   const [adDialogMode, setAdDialogMode] = useState<"create" | "edit">("edit");
-  const [adDialogTarget, setAdDialogTarget] = useState<AdvertisementBanner | null>(null);
+  const [adDialogTarget, setAdDialogTarget] = useState<AdvertisementBanner | null>(
+    null
+  );
 
-  const [deleteTarget, setDeleteTarget] = useState<{ type: string; item: CmsPage | AdvertisementBanner | BlogPost } | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{
+    type: string;
+    item: CmsPage | AdvertisementBanner | BlogPost;
+  } | null>(null);
 
   function openCreateBanner() {
     setAdDialogMode("create");
@@ -44,7 +53,18 @@ export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
     setAdDialogOpen(true);
   }
 
-  function confirmDelete(type: string, item: CmsPage | AdvertisementBanner | BlogPost) {
+  function handleEditPage(page: CmsPage) {
+    if (page.slug === "/homepage" || page.title === "Homepage") {
+      router.push("/cms/homepage");
+      return;
+    }
+    router.push(`/cms/pages/${page.id}`);
+  }
+
+  function confirmDelete(
+    type: string,
+    item: CmsPage | AdvertisementBanner | BlogPost
+  ) {
     setDeleteTarget({ type, item });
   }
 
@@ -74,37 +94,42 @@ export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
     { id: "blogs" as const, label: "Blogs" },
   ];
 
+  const addButtonLabel =
+    activeTab === "pages"
+      ? "Add New Page"
+      : activeTab === "advertisements"
+        ? "Add New Banner"
+        : "Add Blog";
+
+  function handleAdd() {
+    if (activeTab === "pages") {
+      router.push("/cms/homepage");
+      return;
+    }
+    if (activeTab === "advertisements") {
+      openCreateBanner();
+      return;
+    }
+    router.push("/blogs/new");
+  }
+
   return (
     <div className="space-y-5">
-      {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-[28px] font-bold tracking-tight text-[#111827]">
           Content Management CMS
         </h1>
-        {activeTab === "advertisements" ? (
-          <button
-            type="button"
-            onClick={openCreateBanner}
-            className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#f0a500] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#d99400]"
-          >
-            <Plus className="size-4" />
-            Add New Banner
-          </button>
-        ) : null}
-        {activeTab === "blogs" ? (
-          <button
-            type="button"
-            onClick={() => router.push("/blogs/new")}
-            className="inline-flex h-11 items-center gap-2 rounded-xl bg-[#f0a500] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#d99400]"
-          >
-            <Plus className="size-4" />
-            Add Blog
-          </button>
-        ) : null}
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="inline-flex h-11 w-fit items-center gap-2 rounded-xl bg-[#f0a500] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#d99400]"
+        >
+          <Plus className="size-4" />
+          {addButtonLabel}
+        </button>
       </div>
 
-      {/* Tab Switcher */}
-      <div className="flex items-center gap-1 rounded-xl bg-[#f3f4f6] p-1 w-fit">
+      <div className="flex w-fit items-center gap-1 rounded-xl bg-[#f3f4f6] p-1">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -121,17 +146,15 @@ export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
         ))}
       </div>
 
-      {/* Pages Tab */}
       {activeTab === "pages" ? (
         <PagesTable
           pages={pages}
-          onPreview={() => {}}
-          onEdit={() => {}}
+          onPreview={handleEditPage}
+          onEdit={handleEditPage}
           onDelete={(p) => confirmDelete("page", p)}
         />
       ) : null}
 
-      {/* Advertisements Tab */}
       {activeTab === "advertisements" ? (
         <AdvertisementsTable
           banners={banners}
@@ -140,23 +163,29 @@ export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
         />
       ) : null}
 
-      {/* Blogs Tab */}
       {activeTab === "blogs" ? (
         <BlogsTable
           blogs={blogs}
-          onPreview={() => {}}
+          onPreview={(b) => router.push(`/blogs/${b.id}`)}
           onDelete={(b) => confirmDelete("blog", b)}
         />
       ) : null}
 
-      {/* Delete Confirmation */}
       <Dialog
         open={!!deleteTarget}
         onClose={() => setDeleteTarget(null)}
-        title={`Delete ${deleteTarget?.type === "page" ? "Page" : deleteTarget?.type === "banner" ? "Banner" : "Blog"}`}
+        title={`Delete ${
+          deleteTarget?.type === "page"
+            ? "Page"
+            : deleteTarget?.type === "banner"
+              ? "Banner"
+              : "Blog"
+        }`}
       >
         <p className="text-[15px] text-[#4b5563]">
-          Are you sure you want to delete <span className="font-semibold text-[#111827]">{deleteItemName()}</span>? This action cannot be undone.
+          Are you sure you want to delete{" "}
+          <span className="font-semibold text-[#111827]">{deleteItemName()}</span>
+          ? This action cannot be undone.
         </p>
         <div className="mt-6 flex justify-end gap-3">
           <button
@@ -176,7 +205,6 @@ export function CmsView({ initialTab = "pages" }: { initialTab?: string }) {
         </div>
       </Dialog>
 
-      {/* Advertisement Dialog */}
       <AdvertisementDialog
         open={adDialogOpen}
         onClose={() => setAdDialogOpen(false)}
